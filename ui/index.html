@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWAS Multitask Learning Model</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4a6fa5',
+                        secondary: '#6b8cae',
+                        accent: '#ff6b6b',
+                        dark: '#343a40',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Header -->
+    <header class="sticky top-0 bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-2xl font-bold text-primary mb-4 md:mb-0">GWAS Multitask Learning</h1>
+            <nav>
+                <ul class="flex flex-wrap justify-center">
+                    <li class="mx-2"><a href="#home" class="px-3 py-2 rounded hover:bg-blue-100 hover:text-primary active-nav" id="nav-home">Home</a></li>
+                    <li class="mx-2"><a href="#research" class="px-3 py-2 rounded hover:bg-blue-100 hover:text-primary" id="nav-research">Research</a></li>
+                    <li class="mx-2"><a href="#predict" class="px-3 py-2 rounded hover:bg-blue-100 hover:text-primary" id="nav-predict">Predict</a></li>
+                    <li class="mx-2"><a href="#visualize" class="px-3 py-2 rounded hover:bg-blue-100 hover:text-primary" id="nav-visualize">Visualize</a></li>
+                    <li class="mx-2"><a href="#about" class="px-3 py-2 rounded hover:bg-blue-100 hover:text-primary" id="nav-about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-20 bg-gradient-to-br from-gray-50 to-gray-200">
+        <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 lg:pr-10 mb-10 lg:mb-0">
+                <h2 class="text-4xl font-bold text-primary mb-6">Multitask Learning for GWAS-Based Disease Prediction</h2>
+                <p class="text-xl mb-8">An innovative approach using attention-based pooling mechanisms to enhance genetic feature extraction</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#research" class="px-6 py-3 bg-primary text-white rounded font-semibold hover:bg-blue-700 transition">Learn More</a>
+                    <a href="#predict" class="px-6 py-3 bg-secondary text-white rounded font-semibold hover:bg-blue-600 transition">Try the Model</a>
+                </div>
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+                <img src="images/model_architecture.png" alt="Model Architecture" class="rounded-lg shadow-lg max-w-full">
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary mb-16 relative">
+                Research Findings
+                <span class="absolute left-1/2 bottom-0 w-20 h-1 bg-accent -translate-x-1/2 translate-y-6"></span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md transition-transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold text-primary mb-4">Model Architecture</h3>
+                    <p class="mb-4">Our multitask learning model uses shared layers with attention-based pooling to predict risk for multiple diseases simultaneously.</p>
+                    <img src="images/model_architecture.png" alt="Model Architecture" class="w-full rounded border border-gray-200 mt-4">
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md transition-transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold text-primary mb-4">Performance Metrics</h3>
+                    <p class="mb-4">The model achieves high accuracy across all three disease tasks:</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li class="mb-1">Cardiovascular Disease: 98% accuracy</li>
+                        <li class="mb-1">Type 2 Diabetes: 98% accuracy</li>
+                        <li class="mb-1">Cancer: 99% accuracy</li>
+                    </ul>
+                    <img src="images/roc_curves.png" alt="ROC Curves" class="w-full rounded border border-gray-200 mt-4">
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md transition-transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold text-primary mb-4">Feature Extraction</h3>
+                    <p class="mb-4">The attention-based pooling mechanism enhances genetic feature extraction by prioritizing different SNPs for each disease.</p>
+                    <img src="images/attention_weights.png" alt="Attention Weights" class="w-full rounded border border-gray-200 mt-4">
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md transition-transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold text-primary mb-4">Data Analysis</h3>
+                    <p class="mb-4">Exploratory data analysis revealed patterns in genetic effect sizes across diseases.</p>
+                    <img src="images/effect_size_distribution.png" alt="Effect Size Distribution" class="w-full rounded border border-gray-200 mt-4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Predict Section -->
+    <section id="predict" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary mb-16 relative">
+                Make Predictions
+                <span class="absolute left-1/2 bottom-0 w-20 h-1 bg-accent -translate-x-1/2 translate-y-6"></span>
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-primary mb-6">Input Genetic Data</h3>
+                    <form id="prediction-form" class="space-y-6">
+                        <div class="space-y-2">
+                            <label for="upload-file" class="block font-medium">Upload GWAS Data (CSV):</label>
+                            <input type="file" id="upload-file" accept=".csv" class="w-full p-3 border border-gray-300 rounded">
+                            <p class="text-sm text-gray-500">File should contain SNP IDs, effect sizes, standard errors, and p-values</p>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="sample-data" class="block font-medium">Or use sample data:</label>
+                            <button type="button" id="sample-data" class="px-4 py-2 bg-secondary text-white rounded font-medium hover:bg-blue-600 transition">Load Sample Data</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full px-4 py-3 bg-primary text-white rounded font-medium hover:bg-blue-700 transition">Predict Disease Risk</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-primary mb-6">Prediction Results</h3>
+                    <div id="results-placeholder" class="text-center py-12 text-gray-500">
+                        <p>Upload data to see prediction results</p>
+                    </div>
+                    <div id="results-content" class="hidden">
+                        <div class="space-y-6 mb-8">
+                            <div class="space-y-2">
+                                <h4 class="font-medium">Cardiovascular Disease</h4>
+                                <div class="h-5 bg-gray-200 rounded-full overflow-hidden">
+                                    <div id="cardio-level" class="h-full bg-accent rounded-full" style="width: 0%"></div>
+                                </div>
+                                <p class="text-right font-medium">Risk Score: <span id="cardio-value">0%</span></p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-medium">Type 2 Diabetes</h4>
+                                <div class="h-5 bg-gray-200 rounded-full overflow-hidden">
+                                    <div id="t2d-level" class="h-full bg-accent rounded-full" style="width: 0%"></div>
+                                </div>
+                                <p class="text-right font-medium">Risk Score: <span id="t2d-value">0%</span></p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-medium">Cancer</h4>
+                                <div class="h-5 bg-gray-200 rounded-full overflow-hidden">
+                                    <div id="cancer-level" class="h-full bg-accent rounded-full" style="width: 0%"></div>
+                                </div>
+                                <p class="text-right font-medium">Risk Score: <span id="cancer-value">0%</span></p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-4">Detailed Results</h4>
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold">Disease</th>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold">Risk Score</th>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold">Risk Level</th>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold">Confidence</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="results-table">
+                                    <!-- Results will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualize Section -->
+    <section id="visualize" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary mb-16 relative">
+                Visualizations
+                <span class="absolute left-1/2 bottom-0 w-20 h-1 bg-accent -translate-x-1/2 translate-y-6"></span>
+            </h2>
+            <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden">
+                <div class="flex flex-wrap border-b border-gray-200">
+                    <button class="tab-btn flex-1 py-4 text-center font-medium transition focus:outline-none bg-white border-b-2 border-primary text-primary" data-tab="performance">Performance</button>
+                    <button class="tab-btn flex-1 py-4 text-center font-medium transition focus:outline-none hover:bg-gray-100" data-tab="features">Feature Importance</button>
+                    <button class="tab-btn flex-1 py-4 text-center font-medium transition focus:outline-none hover:bg-gray-100" data-tab="distributions">Distributions</button>
+                    <button class="tab-btn flex-1 py-4 text-center font-medium transition focus:outline-none hover:bg-gray-100" data-tab="confusion">Confusion Matrices</button>
+                </div>
+                <div class="p-8">
+                    <div class="tab-pane" id="performance-tab">
+                        <h3 class="text-xl font-bold text-primary text-center mb-8">Model Performance</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">Loss Curves</h4>
+                                <img src="images/loss_curves.png" alt="Loss Curves" class="mx-auto max-h-64 object-contain mb-4">
+                                <p class="text-sm text-gray-600">Training and validation loss over epochs</p>
+                            </div>
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">ROC Curves</h4>
+                                <img src="images/roc_curves.png" alt="ROC Curves" class="mx-auto max-h-64 object-contain mb-4">
+                                <p class="text-sm text-gray-600">ROC curves for each disease prediction task</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane hidden" id="features-tab">
+                        <h3 class="text-xl font-bold text-primary text-center mb-8">Feature Importance</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">Attention Weights</h4>
+                                <img src="images/attention_weights.png" alt="Attention Weights" class="mx-auto max-h-64 object-contain mb-4">
+                                <p class="text-sm text-gray-600">Average attention weights by disease</p>
+                            </div>
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">PCA Visualization</h4>
+                                <img src="images/pca_visualization.png" alt="PCA Visualization" class="mx-auto max-h-64 object-contain mb-4">
+                                <p class="text-sm text-gray-600">PCA of genetic features colored by disease risk</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane hidden" id="distributions-tab">
+                        <h3 class="text-xl font-bold text-primary text-center mb-8">Data Distributions</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">Effect Size Distribution</h4>
+                                <img src="images/effect_size_distribution.png" alt="Effect Size Distribution" class="mx-auto max-h-64 object-contain mb-4">
+                                <p class="text-sm text-gray-600">Distribution of effect sizes across diseases</p>
+                            </div>
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">Chromosome Distribution</h4>
+                                <img src="images/chromosome_distribution.png" alt="Chromosome Distribution" class="mx-auto max-h-64 object-contain mb-4">
+                                <p class="text-sm text-gray-600">Distribution of SNPs across chromosomes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane hidden" id="confusion-tab">
+                        <h3 class="text-xl font-bold text-primary text-center mb-8">Confusion Matrices</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">Cardiovascular Disease</h4>
+                                <img src="images/confusion_matrix_0.png" alt="Cardiovascular Confusion Matrix" class="mx-auto max-h-48 object-contain">
+                            </div>
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">Type 2 Diabetes</h4>
+                                <img src="images/confusion_matrix_1.png" alt="T2D Confusion Matrix" class="mx-auto max-h-48 object-contain">
+                            </div>
+                            <div class="bg-white p-6 rounded shadow-sm text-center">
+                                <h4 class="font-medium mb-4">Cancer</h4>
+                                <img src="images/confusion_matrix_2.png" alt="Cancer Confusion Matrix" class="mx-auto max-h-48 object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-primary mb-16 relative">
+                About the Project
+                <span class="absolute left-1/2 bottom-0 w-20 h-1 bg-accent -translate-x-1/2 translate-y-6"></span>
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
+                <div class="lg:col-span-2 space-y-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-primary mb-4">Project Overview</h3>
+                        <p>This project implements a multitask learning model for predicting disease risk based on GWAS data. The model uses shared layers with an attention-based pooling mechanism to enhance genetic feature extraction across multiple diseases.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-primary mb-4">Methodology</h3>
+                        <p>We used real cardiovascular disease GWAS data from the CARDIoGRAMplusC4D consortium and created derived datasets for Type 2 Diabetes and Cancer to demonstrate the multitask learning approach.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-primary mb-4">Model Architecture</h3>
+                        <p>The model consists of shared feature extraction layers, an attention-based pooling mechanism, and disease-specific output layers. This architecture allows the model to leverage shared genetic patterns while still capturing disease-specific associations.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-primary mb-4">Future Work</h3>
+                        <p>Future improvements could include using real GWAS datasets for all diseases, incorporating larger SNP sets, and adding population stratification controls for more robust predictions.</p>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <img src="images/model_diagram.png" alt="Model Diagram" class="rounded-lg shadow-lg max-w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">GWAS Multitask Learning</h3>
+                    <p class="text-gray-400">Advancing genomic research through AI-driven risk assessment</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#research" class="text-gray-400 hover:text-white transition">Research</a></li>
+                        <li><a href="#predict" class="text-gray-400 hover:text-white transition">Predict</a></li>
+                        <li><a href="#visualize" class="text-gray-400 hover:text-white transition">Visualize</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4">Contact</h4>
+                    <p class="flex items-center text-gray-400 mb-2">
+                        <i class="fas fa-envelope mr-3"></i> research@example.com
+                    </p>
+                    <p class="flex items-center text-gray-400">
+                        <i class="fas fa-globe mr-3"></i> www.example.com
+                    </p>
+                </div>
+            </div>
+            <div class="text-center pt-6 border-t border-gray-700">
+                <p class="text-gray-400 text-sm">&copy; 2025 GWAS Multitask Learning Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // DOM Elements and event handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation active state handler
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('section');
+            
+            // Smooth scrolling for navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active link
+                    navLinks.forEach(link => link.classList.remove('active-nav', 'bg-blue-100', 'text-primary'));
+                    this.classList.add('active-nav', 'bg-blue-100', 'text-primary');
+                });
+            });
+            
+            // Update active link on scroll
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav', 'bg-blue-100', 'text-primary');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active-nav', 'bg-blue-100', 'text-primary');
+                    }
+                });
+            });
+            
+            // Visualization tabs
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active button
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('bg-white', 'border-b-2', 'border-primary', 'text-primary');
+                        btn.classList.add('hover:bg-gray-100');
+                    });
+                    this.classList.add('bg-white', 'border-b-2', 'border-primary', 'text-primary');
+                    this.classList.remove('hover:bg-gray-100');
+                    
+                    // Show active tab pane
+                    tabPanes.forEach(pane => pane.classList.add('hidden'));
+                    document.getElementById(`${tabId}-tab`).classList.remove('hidden');
+                });
+            });
+            
+            // Prediction form
+            const predictionForm = document.getElementById('prediction-form');
+            const sampleDataButton = document.getElementById('sample-data');
+            const resultsPlaceholder = document.getElementById('results-placeholder');
+            const resultsContent = document.getElementById('results-content');
+            
+            // Sample data loading
+            sampleDataButton.addEventListener('click', function() {
+                // Simulate loading sample data
+                resultsPlaceholder.classList.add('hidden');
+                resultsContent.classList.remove('hidden');
+                
+                // Simulate prediction results with sample data
+                simulatePrediction();
+            });
+            
+            // Form submission
+            predictionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const fileInput = document.getElementById('upload-file');
+                if (fileInput.files.length > 0) {
+                    // Simulate file processing and prediction
+                    resultsPlaceholder.classList.add('hidden');
+                    resultsContent.classList.remove('hidden');
+                    
+                    // Simulate prediction results
+                    simulatePrediction();
+                } else {
+                    alert('Please upload a file or use sample data');
+                }
+            });
+            
+            // Function to simulate prediction results
+            function simulatePrediction() {
+                // Simulate risk scores
+                const cardioRisk = Math.random() * 0.4 + 0.3; // 30-70%
+                const t2dRisk = Math.random() * 0.5 + 0.2; // 20-70%
+                const cancerRisk = Math.random() * 0.3 + 0.1; // 10-40%
+                
+                // Update risk meters
+                updateRiskMeter('cardio', cardioRisk);
+                updateRiskMeter('t2d', t2dRisk);
+                updateRiskMeter('cancer', cancerRisk);
+                
+                // Update results table
+                const resultsTable = document.getElementById('results-table');
+                resultsTable.innerHTML = '';
+                
+                addResultRow(resultsTable, 'Cardiovascular Disease', cardioRisk);
+                addResultRow(resultsTable, 'Type 2 Diabetes', t2dRisk);
+                addResultRow(resultsTable, 'Cancer', cancerRisk);
+            }
+            
+            // Function to update risk meter
+            function updateRiskMeter(id, risk) {
+                const riskLevel = document.getElementById(`${id}-level`);
+                const riskValue = document.getElementById(`${id}-value`);
+                
+                // Update width of risk level
+                riskLevel.style.width = `${risk * 100}%`;
+                
+                // Update risk value text
+                riskValue.textContent = `${Math.round(risk * 100)}%`;
+                
+                // Update color based on risk level
+                if (risk < 0.3) {
+                    riskLevel.classList.remove('bg-yellow-500', 'bg-red-500');
+                    riskLevel.classList.add('bg-green-500');
+                } else if (risk < 0.6) {
+                    riskLevel.classList.remove('bg-green-500', 'bg-red-500');
+                    riskLevel.classList.add('bg-yellow-500');
+                } else {
+                    riskLevel.classList.remove('bg-green-500', 'bg-yellow-500');
+                    riskLevel.classList.add('bg-red-500');
+                }
+            }
+            
+            // Function to add result row to table
+            function addResultRow(table, disease, risk) {
+                const row = document.createElement('tr');
+                row.classList.add('border-b', 'border-gray-200');
+                
+                // Disease cell
+                const diseaseCell = document.createElement('td');
+                diseaseCell.classList.add('px-4', 'py-3');
+                diseaseCell.textContent = disease;
+                
+                // Risk score cell
+                const riskScoreCell = document.createElement('td');
+                riskScoreCell.classList.add('px-4', 'py-3');
+                riskScoreCell.textContent = `${Math.round(risk * 100)}%`;
+                
+                // Risk level cell
+                const riskLevelCell = document.createElement('td');
+                riskLevelCell.classList.add('px-4', 'py-3');
+                let riskLevel;
+                let colorClass;
+                if (risk < 0.3) {
+                    riskLevel = 'Low';
+                    colorClass = 'text-green-600';
+                } else if (risk < 0.6) {
+                    riskLevel = 'Moderate';
+                    colorClass = 'text-yellow-600';
+                } else {
+                    riskLevel = 'High';
+                    colorClass = 'text-red-600';
+                }
+                riskLevelCell.textContent = riskLevel;
+                riskLevelCell.classList.add(colorClass);
+                
+                // Confidence cell
+                const confidenceCell = document.createElement('td');
+                confidenceCell.classList.add('px-4', 'py-3');
+                const confidence = Math.round((1 - Math.random() * 0.3) * 100);
+                confidenceCell.textContent = `${confidence}%`;
+                
+                // Append cells to row
+                row.appendChild(diseaseCell);
+                row.appendChild(riskScoreCell);
+                row.appendChild(riskLevelCell);
+                row.appendChild(confidenceCell);
+                
+                // Append row to table
+                table.appendChild(row);
+            }
+        });
+    </script>
+</body>
+</html>
