@@ -1,3 +1,6 @@
+import torch
+import torch.nn as nn
+
 class MultitaskGWASModel(nn.Module):
     def __init__(self, input_dim, hidden_dim=128, output_dim=1, num_tasks=3, dropout_rate=0.3):
         super(MultitaskGWASModel, self).__init__()
