@@ -1,15 +1,3 @@
-"""
-Multitask Neural Network Architecture for Genome-Wide Association Studies (GWAS)
-
-This module implements a deep learning architecture designed for simultaneous analysis
-of multiple phenotypic traits in genomic data, incorporating attention mechanisms
-for task-specific feature weighting.
-
-Author: [Your Name]
-Institution: [Your Institution]
-Date: [Current Date]
-"""
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
